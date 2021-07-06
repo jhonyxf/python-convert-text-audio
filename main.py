@@ -1,6 +1,8 @@
 import pyttsx3 
 import pdfplumber 
 import PyPDF2
+import gtts
+from playsound import playsound
 
 file = 'artigo.pdf'
 
@@ -13,6 +15,8 @@ pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
 #Get the number of pages
 pages = pdfReader.numPages
 
+text = ''
+
 #Create a pdfplumber object and loop through the pages
 with pdfplumber.open(file) as pdf:
  #Loop through the number of pages
@@ -20,6 +24,9 @@ with pdfplumber.open(file) as pdf:
       page = pdf.pages[i]
       text = page.extract_text()
       print(text)
+      audio = gtts.gTTS(text, lang='pt-br', slow=False)
+      audio.save("hello.mp3")
+      #playsound("hello.mp3")
       speaker = pyttsx3.init()
       speaker.say(text)
       speaker.runAndWait()
