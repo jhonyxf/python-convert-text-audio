@@ -28,5 +28,7 @@ with pdfplumber.open(file) as pdf:
       audio.save("hello.mp3")
       #playsound("hello.mp3")
       speaker = pyttsx3.init()
+      speaker.save_to_file(text, 'speech.mp3')
       speaker.say(text)
       speaker.runAndWait()
+      
